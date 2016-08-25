@@ -203,12 +203,37 @@ define([
     };
 
     if (this.options.get('dropdownAutoWidth')) {
-      css.minWidth = css.width;
+      css.minWidth = this._getDropdownAutoWidth() + 'px';
       css.position = 'relative';
       css.width = 'auto';
     }
 
     this.$dropdown.css(css);
+  };
+
+  AttachBody.prototype._getDropdownAutoWidth = function() {
+    this.$dropdown.css('min-width', '');
+    var containerWidth = this.$container.outerWidth(false),
+      resultsListNode = $('.select2-results__options', this.$dropdown),
+      dropdownWidth = resultsListNode.outerWidth(false) + (resultsListNode[0].scrollHeight === resultsListNode[0].clientHeight ? 0 : this._getScrollBarDimensions().width);
+
+    return dropdownWidth > containerWidth ? containerWidth = dropdownWidth : dropdownWidth = containerWidth;
+  };
+
+  AttachBody.prototype._getScrollBarDimensions = function() {
+    if (this.scrollBarDimensions) {
+      return this.scrollBarDimensions;
+    }
+
+    var $template = $('<div class="position-calculation"><div').appendTo(document.body);
+
+    this.scrollBarDimensions = {
+      width: $template.width() - $template[0].clientWidth,
+      height: $template.height() - $template[0].clientHeight
+    };
+    $template.remove();
+
+    return this.scrollBarDimensions;
   };
 
   AttachBody.prototype._showDropdown = function (decorated) {
