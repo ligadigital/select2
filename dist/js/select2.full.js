@@ -4324,7 +4324,7 @@ S2.define('select2/dropdown/attachBody',[
     this.$dropdown.css('min-width', '');
     var containerWidth = this.$container.outerWidth(false),
       resultsListNode = $('.select2-results__options', this.$dropdown),
-      dropdownWidth = resultsListNode.outerWidth(false) + (resultsListNode[0].scrollHeight === resultsListNode[0].clientHeight ? 0 : this._getScrollBarDimensions().width);
+      dropdownWidth = resultsListNode.length > 0 ? resultsListNode.outerWidth(false) + (resultsListNode[0].scrollHeight === resultsListNode[0].clientHeight ? 0 : this._getScrollBarDimensions().width) : 0;
 
     return dropdownWidth > containerWidth ? containerWidth = dropdownWidth : dropdownWidth = containerWidth;
   };
