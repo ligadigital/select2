@@ -98,6 +98,14 @@
   .select2-search--dropdown.select2-search--hide {
     display: none; }
 
+.position-calculation {
+  position: absolute;
+  top: -10000px;
+  left: -10000px;
+  width: 100px;
+  height: 100px;
+  overflow: scroll; }
+
 .select2-close-mask {
   border: 0;
   margin: 0;
