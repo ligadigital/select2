@@ -148,7 +148,9 @@ define([
 
   Results.prototype.showLoading = function (params) {
     this.hideLoading();
-
+    if (this.$results.children().length === 0) {
+      this.$results.parents('.select2-container').addClass('select2-container--empty')
+    }
     var loadingMore = this.options.get('translations').get('searching');
 
     var loading = {
@@ -163,6 +165,7 @@ define([
   };
 
   Results.prototype.hideLoading = function () {
+    this.$results.parents('.select2-container').removeClass('select2-container--empty')
     this.$results.find('.loading-results').remove();
   };
 
