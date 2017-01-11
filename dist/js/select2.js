@@ -1,5 +1,5 @@
 /*!
- * Select2 4.0.3
+ * Select2 4.0.3.2
  * https://select2.github.io
  *
  * Released under the MIT license
@@ -911,7 +911,9 @@ S2.define('select2/results',[
 
   Results.prototype.showLoading = function (params) {
     this.hideLoading();
-
+    if (this.$results.children().length === 0) {
+      this.$results.parents('.select2-container').addClass('select2-container--empty')
+    }
     var loadingMore = this.options.get('translations').get('searching');
 
     var loading = {
@@ -926,6 +928,7 @@ S2.define('select2/results',[
   };
 
   Results.prototype.hideLoading = function () {
+    this.$results.parents('.select2-container').removeClass('select2-container--empty')
     this.$results.find('.loading-results').remove();
   };
 
